@@ -1,7 +1,7 @@
 package models
 
 import (
-	utils "github.com/duvrdx/oasys-crypto/pkg/encryption"
+	encryption "github.com/duvrdx/oasys-crypto/pkg/encryption"
 )
 
 type MasterKey struct {
@@ -11,13 +11,13 @@ type MasterKey struct {
 }
 
 func NewMasterKey(password string, keySize int) (*MasterKey, error) {
-	salt, err := utils.GenerateSalt(keySize)
+	salt, err := encryption.GenerateSalt(keySize)
 
 	if err != nil {
 		return nil, err
 	}
 
-	key, err := utils.DeriveKey([]byte(password), salt, keySize)
+	key, err := encryption.DeriveKey([]byte(password), salt, keySize)
 
 	if err != nil {
 		return nil, err
@@ -31,15 +31,15 @@ func NewMasterKey(password string, keySize int) (*MasterKey, error) {
 }
 
 func (mk *MasterKey) Encrypt(plaintext string) (string, error) {
-	return utils.Encrypt(plaintext, mk.Key)
+	return encryption.Encrypt(plaintext, mk.Key)
 }
 
 func (mk *MasterKey) Decrypt(ciphertext string) (string, error) {
-	return utils.Decrypt(ciphertext, mk.Key)
+	return encryption.Decrypt(ciphertext, mk.Key)
 }
 
 func (mk *MasterKey) VerifyDerivedKey(password string) bool {
-	return utils.VerifyDerivedKey([]byte(password), mk.Salt, mk.Key, mk.KeySize)
+	return encryption.VerifyDerivedKey([]byte(password), mk.Salt, mk.Key, mk.KeySize)
 
 }
 
