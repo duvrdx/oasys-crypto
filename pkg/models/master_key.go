@@ -1,4 +1,4 @@
-package master_key
+package models
 
 import (
 	utils "github.com/duvrdx/oasys-crypto/pkg/encryption"

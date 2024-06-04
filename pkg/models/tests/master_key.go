@@ -1,16 +1,16 @@
-package master_key_test
+package tests
 
 import (
 	"testing"
 
-	master_key "github.com/duvrdx/oasys-crypto/pkg/models"
+	models "github.com/duvrdx/oasys-crypto/pkg/models"
 )
 
 func TestNewMasterKey(t *testing.T) {
 	password := "password"
 	keySize := 32
 
-	mk, err := master_key.NewMasterKey(password, keySize)
+	mk, err := models.NewMasterKey(password, keySize)
 	if err != nil {
 		t.Fatalf("Error creating master key: %v", err)
 	}
@@ -36,7 +36,7 @@ func TestEncryptAndDecrypt(t *testing.T) {
 	password := "password"
 	keySize := 32
 
-	mk, err := master_key.NewMasterKey(password, keySize)
+	mk, err := models.NewMasterKey(password, keySize)
 	if err != nil {
 		t.Fatalf("Error creating master key: %v", err)
 	}
@@ -61,7 +61,7 @@ func TestVerifyDerivedKey(t *testing.T) {
 	password := "password"
 	keySize := 32
 
-	mk, err := master_key.NewMasterKey(password, keySize)
+	mk, err := models.NewMasterKey(password, keySize)
 	if err != nil {
 		t.Fatalf("Error creating master key: %v", err)
 	}
